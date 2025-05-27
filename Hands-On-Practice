@@ -1,6 +1,10 @@
 ----Day 1----
 Create Spring Boot application with MVC, Data JPA, Rest Methods with Pagination and Filtering
 ----
+----Day 2----
+Practice with Testing, Security, Exception Handling, Validation, Swagger
+Inter-service Communication through APIs
+-----
 
 
 
@@ -13,3 +17,4 @@ Create Spring Boot application with MVC, Data JPA, Rest Methods with Pagination 
 
 Task1:
 Upload the screenshots of Pagination in SB_Demos_1
+Upload the ss of Order Service by making inter-service communication from Product Service
