@@ -1,8 +1,11 @@
 package com.learning.productservice.Model;
 
+import com.learning.productservice.Util.ValidName;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Product {
@@ -10,8 +13,11 @@ public class Product {
     @Id
     @GeneratedValue
     private int prdid;
+    @ValidName
     private String prdname;
+    @Positive(message="Only absolute price value to be given")
     private double prdprice;
+    @NotEmpty(message="Product description is required")
     private String prddesc;
 
     public Product() {

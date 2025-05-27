@@ -1,9 +1,13 @@
 package com.learning.productservice.Controller;
 
 
+import com.learning.productservice.Exception.ProductNotFoundException;
 import com.learning.productservice.Model.Product;
 import com.learning.productservice.Repository.ProductRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,21 +30,29 @@ public class ProductController {
         return "Welcome to the Product Service";
     }
 
-    @GetMapping("/count")
+    @GetMapping("/v1/count")
     public ResponseEntity<String> count() {
         long ct=productRepository.count();
         return new ResponseEntity<>("Number of products is "+ct, HttpStatus.OK);
     }
 
-    @GetMapping("/v1/products")
+    //For Unit Testing
+    @GetMapping("/v2/count")
+    public long count1(){
+        return productRepository.count();
+    }
+
+    @GetMapping("/products/v1")
+    @Cacheable(value="allproducts")
     public Iterable<Product> getProducts() {
         return productRepository.findAll();
     }
 
+    //Example for Exception handling and Path Variable
     @GetMapping("/product/{id}")
     public Product getProduct(@PathVariable int id) {
         Optional<Product> product=productRepository.findById(id);
-        return product.orElse(null);
+        return product.orElseThrow(()-> new ProductNotFoundException(id));
     }
 
     @GetMapping("/product/v1")
@@ -56,8 +68,8 @@ public class ProductController {
     }
 
     //Pagination
-    @GetMapping("/v2/products")
-    public Page<Product> getProducts3(@PageableDefault(size=10) Pageable pageable) {
+    @GetMapping("/products/v2")
+    public Page<Product> getProducts3(@PageableDefault(size=2) Pageable pageable) {
         return productRepository.findAll(pageable);
     }
 
@@ -68,8 +80,8 @@ public class ProductController {
     }
 
     //Post Methods in Rest
-
     @PostMapping("/new/v1")
+    @CacheEvict(value = "allproducts", allEntries = true)
     public ResponseEntity<String> add() {
         Product product=new Product();
         product.setPrdname("Apple 14");
@@ -79,8 +91,9 @@ public class ProductController {
         return new ResponseEntity<>("Product added successfully", HttpStatus.OK);
     }
 
+    //Validation implementation
     @PostMapping("/new/v2")
-    public ResponseEntity<String> add2(@RequestBody Product product) {
+    public ResponseEntity<String> add2(@Valid @RequestBody Product product) {
         productRepository.save(product);
         return new ResponseEntity<>("Product added successfully", HttpStatus.OK);
     }
