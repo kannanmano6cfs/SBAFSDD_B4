@@ -4,6 +4,8 @@ package com.learning.productservice.Controller;
 import com.learning.productservice.Exception.ProductNotFoundException;
 import com.learning.productservice.Model.Product;
 import com.learning.productservice.Repository.ProductRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -126,16 +128,27 @@ public class ProductController {
         return new ResponseEntity<>("All Products deleted successfully", HttpStatus.OK);
     }
 
-    //Inter-Service Communication
+    //Inter-Service Communication, Retry and CircuitBreaker
 
     private static final String ordsvc_API="http://localhost:8082/api/placeorder";
+    int att=1;
 
     @GetMapping("/choose/{id}")
+   // @Retry(name="fss1",fallbackMethod = "fallback")
+    @CircuitBreaker(name="fss2", fallbackMethod = "fallback")
     public ResponseEntity<String> choose(@PathVariable int id) {
+        //System.out.println("Product chosen for place the order "+att++);//demo - Retry
         Optional<Product> product=productRepository.findById(id);
 
         ResponseEntity<String> response=restTemplate.postForEntity(ordsvc_API,product,String.class);
-
+        //System.out.println("Order Placed Successfully");//demo - Retry
         return response;
     }
+
+    //Fallback Method
+    public ResponseEntity<String> fallback(Throwable throwable) {
+        //System.out.println("Unable to place due to order service issues");//demo - Retry
+        return new ResponseEntity<>("Order Service Unavailable!!", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

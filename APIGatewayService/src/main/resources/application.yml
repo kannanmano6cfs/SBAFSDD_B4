@@ -1,0 +1,23 @@
+#Configuration for Gateway Routing
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: serviceA
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/servicea/**
+#        - id: serviceB
+#          uri: http://localhost:8082
+#          predicates:
+#            - Path=/serviceb/**
+
+#Configuration for Gateway Load balancing
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: serviceA
+          uri: lb://serviceA
+          predicates:
+            - Path=/servicea
