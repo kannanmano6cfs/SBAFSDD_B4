@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -23,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     //@GetMapping("/")
     @RequestMapping(path="/", method= RequestMethod.GET)
@@ -120,5 +124,18 @@ public class ProductController {
     public ResponseEntity<String> deleteAll() {
         productRepository.deleteAll();
         return new ResponseEntity<>("All Products deleted successfully", HttpStatus.OK);
+    }
+
+    //Inter-Service Communication
+
+    private static final String ordsvc_API="http://localhost:8082/api/placeorder";
+
+    @GetMapping("/choose/{id}")
+    public ResponseEntity<String> choose(@PathVariable int id) {
+        Optional<Product> product=productRepository.findById(id);
+
+        ResponseEntity<String> response=restTemplate.postForEntity(ordsvc_API,product,String.class);
+
+        return response;
     }
 }
