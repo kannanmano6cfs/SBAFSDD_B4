@@ -7,7 +7,7 @@ Inter-service Communication through APIs
 -----
 ----Day 3----
 Pratice with Spring Actuator, Monitoring using Prometheus and Grafana, DT-Zipkin, Service Discovery using Eureka
-
+Practice with Retry, CircuitBreaker, APi Gateway and Load balancing
 -----
 
 
@@ -21,3 +21,4 @@ Pratice with Spring Actuator, Monitoring using Prometheus and Grafana, DT-Zipkin
 Task1:
 Upload the screenshots of Pagination in SB_Demos_1
 Upload the ss of Order Service by making inter-service communication from Product Service
+Upload the ss of OTP Code Verification application in spring boot
