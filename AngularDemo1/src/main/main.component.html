@@ -1,0 +1,29 @@
+<div [class]="classname">
+<h2>{{welcome}}</h2>
+</div>
+<button (click)="changeClass()">Change Style</button>
+<h2>The following list of Courses are offered here to the participants from various countries</h2>
+<button (click)="showCourses()">Show Courses</button> <button (click)="hideCourses()">Hide Courses</button>
+<div *ngIf="flag">
+<ul>
+    <li *ngFor="let course of courses">
+        {{course}}
+    </li>    
+</ul>
+</div>
+
+<h3>Interpolations</h3>
+
+Addition {{ num1 + num2 }}
+<hr>
+<h3>Property Binding</h3>
+<img [src]="img1" [style.height]="height" [alt]="altTxt" />
+<button (click)="changeHeight()">Zoom In/Out</button>
+<hr>
+<h3>Event Binding</h3>
+<h3>{{ text }}</h3>
+<button (click)="showText()">Show Text</button>
+<hr>
+<h3>Two Way Binding</h3>
+<input type="text" [(ngModel)]="message" />
+<p>Course Request for {{message}}</p>
