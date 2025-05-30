@@ -16,6 +16,8 @@ Practice with Angular basics such as Components, Data Binding, directives
 ----
 ----Day 5----
 Work with Angular concepts such as Forms,Bootstrap,pipes,services
+Work with Angular MVC
+Create OTP Verification web application in ANGULAR
 -----
 
 
@@ -29,3 +31,4 @@ Upload the screenshots of Pagination in SB_Demos_1
 Upload the ss of Order Service by making inter-service communication from Product Service
 Upload the ss of OTP Code Verification application in spring boot
 Upload the ss of ER DIagram in ER_Diagrams directory of repo
+Upload the ss of OTP web application
