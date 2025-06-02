@@ -19,7 +19,9 @@ Work with Angular concepts such as Forms,Bootstrap,pipes,services
 Work with Angular MVC
 Create OTP Verification web application in ANGULAR
 -----
-
+----Day 6----
+Prepare DDD document with context map diagram
+-----
 
 
 
@@ -32,3 +34,4 @@ Upload the ss of Order Service by making inter-service communication from Produc
 Upload the ss of OTP Code Verification application in spring boot
 Upload the ss of ER DIagram in ER_Diagrams directory of repo
 Upload the ss of OTP web application
+Upload your DDD document file in DDD_docs
