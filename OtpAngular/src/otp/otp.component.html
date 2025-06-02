@@ -1,0 +1,15 @@
+<h1> OTP Verification Application through EMAIL</h1>
+<hr>
+<div *ngIf="!otpsent">
+    <label for ="email"> Enter E-Mail ID</label>
+    <input type="email" [(ngModel)]="email" placeholder="xxxx@xxxx.com" required/>
+    <button (click)="requestOtp()"> Request OTP</button>
+</div>
+<div *ngIf="otpsent">
+    <label for ="otp"> Enter received OTP</label>
+    <input type="password" [(ngModel)]="otp" placeholder="*********" required=/>
+    <button (click)="confirmOtp()">Confirm OTP</button>
+</div>
+<div>
+    {{message}}
+</div>
