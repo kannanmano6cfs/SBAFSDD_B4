@@ -22,7 +22,10 @@ Create OTP Verification web application in ANGULAR
 ----Day 6----
 Prepare DDD document with context map diagram
 -----
-
+----Day 7----
+Work with Simple BPMN Workflows
+work with Advanced BPMN workflows
+-----
 
 
 
@@ -35,3 +38,4 @@ Upload the ss of OTP Code Verification application in spring boot
 Upload the ss of ER DIagram in ER_Diagrams directory of repo
 Upload the ss of OTP web application
 Upload your DDD document file in DDD_docs
+Upload those two ss of BPMN executions
