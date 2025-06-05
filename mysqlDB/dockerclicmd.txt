@@ -1,0 +1,13 @@
+docker build -t imagename:v1 .
+docker run -d -p 8081:8081 --name containername imagename:v1
+
+
+docker network create fssnet
+
+Backend database MYSQL
+
+docker run --name exmysql --net fssnet --hostname exmysql -d -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=demoDb imagename:v1
+
+FrontEnd Container
+
+docker run --name excontainer --net fssnet --hostname excontainer -d -p 8081:8081 imagename:v1
